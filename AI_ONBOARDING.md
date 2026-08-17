@@ -35,8 +35,34 @@ Before modifying code or documentation, read these files in order:
 
 ## Current Project Status
 
-The project is in documentation setup.
+The documentation foundation is complete, and the architecture direction has been approved.
 
 Application code has not been created yet.
 
-Technology stack: Not decided yet.
+## Approved Architecture Direction
+
+- Architecture: Unified full-stack application.
+- Frontend: Next.js, React, and TypeScript.
+- Backend: Next.js server-side backend in the same application.
+- Database: Supabase PostgreSQL.
+- Authentication: Supabase Auth.
+- API approach: Internal server-side routes/actions in the Next.js application.
+- AI integration: Server-side OpenAI integration.
+- Campus Memory: Stored as application data in PostgreSQL.
+- Retrieval: Simple database/text retrieval first.
+- Future retrieval option: pgvector may be evaluated later if justified.
+- Deployment: Vercel for the application, Supabase for database/auth infrastructure.
+- File storage: Not required for MVP unless a real feature requires it.
+
+## Still Undecided
+
+- Exact database tables, fields, relationships, constraints, indexes, and access rules: Not decided yet.
+- Exact API endpoints and contracts: Not decided yet.
+- Exact OpenAI model: Not decided yet.
+- Exact AI prompts: Not decided yet.
+- Exact Campus Memory retrieval implementation: Not decided yet.
+- Exact UI screens, layout, components, and design system: Not decided yet.
+- Exact validation rules: Not decided yet.
+- Exact testing tools and coverage plan: Not decided yet.
+- Exact logging and monitoring details: Not decided yet.
+- Exact deployment configuration: Not decided yet.
