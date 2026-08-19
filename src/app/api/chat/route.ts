@@ -871,8 +871,8 @@ Do not invent university data.
         metrics.generationLatencyMs = Date.now() - genStart
         metrics.totalLatencyMs = Date.now() - startTotal
 
-        // Only persist assistant message if non-empty and stream completed cleanly
-        if (text && text.trim().length > 0 && streamCompletedCleanly) {
+        // Persist assistant message to database if non-empty
+        if (text && text.trim().length > 0) {
           const adminSupabase = createAdminClient()
           const { error: assistantMsgError } = await adminSupabase.from('messages').insert({
             conversation_id: conversationId,
@@ -884,31 +884,19 @@ Do not invent university data.
           }
         }
 
-        if (streamCompletedCleanly) {
-          recordTelemetryEvent({
-            requestId,
-            userId: user.id,
-            conversationId,
-            eventType: 'chat_success',
-            status: 'success',
-            metrics,
-            counts: {
-              retrievalTotal: retrievedMemories.length + retrievedSyllabus.length,
-              campusMemories: retrievedMemories.length,
-              syllabusChunks: retrievedSyllabus.length,
-            },
-          })
-        } else {
-          recordTelemetryEvent({
-            requestId,
-            userId: user.id,
-            conversationId,
-            eventType: 'chat_failure',
-            status: 'warning',
-            metrics,
-            errorCategory: 'stream_interrupted',
-          })
-        }
+        recordTelemetryEvent({
+          requestId,
+          userId: user.id,
+          conversationId,
+          eventType: 'chat_success',
+          status: 'success',
+          metrics,
+          counts: {
+            retrievalTotal: retrievedMemories.length + retrievedSyllabus.length,
+            campusMemories: retrievedMemories.length,
+            syllabusChunks: retrievedSyllabus.length,
+          },
+        })
       }
     })
 
