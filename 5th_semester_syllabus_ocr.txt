@@ -1,0 +1,280 @@
+CSE 3101: Computer Graphics
+
+Credit: 3.0
+Pre-requisite: MAT 1241 (Coordinate Geometry & Vector Analysis), MAT
+2241 (Linear Algebra and Complex Variable)
+Course Content:
+Scan Conversion: Points plotting techniques, Line drawing algorithms:
+Horizontal and vertical line drawing algorithm, Direct Line drawing
+algorithm, DDA algorithm, Bresenham’s algorithm. Circle Drawing
+algorithms: Direct method, Mid-point circle drawing algorithm. Ellipse
+generating algorithm. Polygon Filling: Scan line polygon fill algorithm,
+Boundary fill algorithm, and Flood fill algorithm.
+2D and 3D transformation: Basic transformations (2D and 3D}:
+Translation, Scaling, Rotation, Other transformations (2D and 3D):
+Reflection, Reflection through an arbitrary plane, Rotation about an arbitrary
+axis in space, shearing. Matrix representations and Homogenebus
+coordinates, General parallel projection Transformation.
+Viewing and Clipping: Viewing pipeline, Window to viewport coordinate
+transformation, 3D viewing, View port clipping, clipping operations: point
+clipping, line clipping, polygon clipping etc. i
+Curves: Curve representation, Surfaces design, Hermit curves, Bezier
+curves, B-spline curves, End conditions for periodic B-spline curves, :
+Rational B-spline curves. .
+Recommended Books: |
+1. Donald Hearn and M. :Computer Graphics, Prentice Hall [Text |
+
+Pauline Barker Book] |
+34
+
+ol
+
+
+2. Steven Harrington :Computer Graphics: A Programming
+Approach, McGraw-Hill College
+3. F.S. Hill :Fundamentals of Computer Graphics,
+Prentice Hall :
+CSE 3102: Computer Graphics Lab
+Credit: 1.0 .
+Pre-requisite: MAT 1241 (Coordinate Geometry & Vector Analysis), MAT
+2241 (Linear Algebra and Complex Variable)
+Course Content: Using different primitives and drawing scenery using
+shapes Implementation of line, circle, ellipse drawing algorithms in drawing
+primitive shapes. Apply Different kind of geometric transformations,
+Coordinate transformations, Composite transformations in both 2D and 3D
+objects. Practice Clipping algorithms: Line, Polygon clipping
+Implementation of animation on 2D screen
+Recommended Books:
+1. Donald Hearnand :Computer Graphics, Prentice Hall [Text
+Pauline Barker Book]
+2. Steven Harrington :Computer Graphics: A Programming
+Approach, McGraw-Hill College
+3. F.S. Hill :Fundamentals of Computer Graphics,
+Prentice Hall
+CSE 3103: Database Management System
+Credit: 3.0
+Pre-requisite: None
+Course Content:
+Introduction: Data and information, Purpose of Database Systems, View of
+Data, Database Languages DDL, DML, DCL.
+Database Design and the E-R Diagram: Entity and attributes, Entity-
+Relationship Model, Entity-Relationship Diagrams, convert E-R model into
+tables. i
+Relational Data Model: Structure of ‘Relational Databases, Database
+Schema, Keys, Schema, Diagrams, Relational Query Languages, Relational
+Database Design, Normalizing database up to 3rd normal form, BCNF.
+i 2c
+
+
+| 4 :
+SQL: Overview of the SQL Query, Language, SQL Data Definition, Basic |
+Structure of SQL, Queries, Aggregate Functions, Modification of the |
+Database, Join Expressions, Views, Transactions, Integrity Constraints,
+Functions and Procedures, Triggers, Recursive Queries, Advanced
+Aggregation Features,
+
+Storage and File Structure: Overview of Physical Storage Media,
+Magnetic Disk and Flash Storage, RAID, Tertiary Storage, File
+Organization, Organization of Records in Files, Data-Dictionary Storage,
+Database Buffer. |
+Transactions: Transaction Concept, A Simple Transaction Model, Storage
+Structure, Transaction Atomicity and Durability, Transaction Isolation,
+Transaction Isolation and Atomicity, Transaction Isolation Levels,
+
+’ Implementation of Isolation Levels, Transactions as SQL Statements, Lock- |
+Based Protocols, Deadlock Handling, Multiple Granularity, Timestamp- |
+Based Protocols, Validation-Based Protocols.
+
+Database-System ~~ Architectures: Centralized and Client-Server
+Architectures, Server System Architectures, Parallel Systems, Design and
+types of Parallel Systems, Distributed Systems architecture and its
+application.
+Books Recommended: |
+1. A. Silberschatz : Database System Concepts, Mcgraw-Hill. |
+2. R. Ramakrishnan, : Database Management System, McGraw-Hill !
+Johannes Gehrke Higher Education
+3. James Martin : Principles of Database Management, Prentice-hall |
+1
+4. Ullman : Database Management systems, Prentice-Hall |
+Publication. i
+CSE 3104: Database Management System Lab
+Credit: 1.5,
+Pre-requisite: None
+Course Content: Create a relational database for a domain like an
+organization and discuss how the schema is effective for that organization.
+Design an E-R diagram and mapping a relational model from that E-R
+diagram for a given scenario. Practice intermediate and advanced SQL
+operation for a given relation. 0 Intermediate SQL: Join Expressions,
+Views etc. 0 Advanced SQL: Trigger, Stored procedure, sub query etc.
+Practice cascading operation using keys for the given relations. Removing
+insertion, deletion and update anomalies using normalization technique and
+redesign the database schema.
+[9
+
+
+| Books Recommended:
+1. A. Silberschatz : Database System Concepts, Mcgraw-Hill,
+2. James Martin : Principles of Database Management, Prentice-
+hall
+3. Ullman : Database Management systems, Prentice-Hall
+Publication. -
+4. Abey : Oracle 8i a Beginners Guide, McGraw-Hill
+CSE 3105: Computer Architecture
+Credit: 3.0
+Pre-requisite: CSE 2105 (Digital System Design)
+Course Content:
+Basic Concept: Introduction to Computer Architecture, Computer Design
+and Computer Organization. Interaction of hardware with the system and
+application software, basic hardware components of computer system and
+bus structure, concept and analysis of performance.
+Machine Instruction: Concept of machine instruction, different parts of
+machine instruction, memory model maps for instruction, micro-operation,
+registers, addressing modes, I/O registers and instruction, program control
+status bits.
+Processing Unit: Components of processing units and their functions,
+general register organization for micro-operation, control word, pipelining,
+instruction pipelining and performance of pipelining.
+1/0 Organization: Peripheral devices, I/O Interface, I/O bus module,
+synchronous data transfer and its different types, asynchronous data transfer,
+different modes of transfer, interrupt processing, direct memory access
+(DMA), I/O processor (IOP).
+Memory Organization: Concept of memory, memory hierarchy, main
+memory, functions of RAM and ROM, memory address map, memory
+connection with CPU, Cache memory and its performance, secondary 5
+storage, virtual memory.
+Composite Architecture: Multiprocessor and its different types,
+multicomputer, CISC and RISC processors, parallel processing, parallelism
+in multiprocessor, Flyinn’s classification.
+Books Recommended:
+1. Carl Hamacher, Zvonko Vranesic :Computer Organization,
+
+
+Hill. [Text Book]
+2. Patterson, David A. and John L. :Computer Organization and
+Hennessy Design: The
+Hardware/Software
+Interface, Third edition.
+3. William Stallings :Computer Organization and
+Architecture: Designing for
+Performance, Prentice Hall
+4
+CSE 3106: Computer Architecture Lab
+Credit: 1.0
+Pre-requisite: None
+Course Content: Design asynchronous counters using J-K flip-flop, Design
+synchronous counters to count the sequence using J-K flipflop Design 8-bit
+Serial In/ Parallel Out shift register using 74LS164, Design 8 bit Parallel In/
+Serial Out shift register using 74LS165 Design memory read/write operation
+using IDT 6116 Static RAM.
+Books Recommended:
+1. Carl Hamacher, Zvonko Vranesic :Computer Organization,
+and Safwat Zaky McGraw-
+Hill. [Text Book]
+2. Patterson, David A. and John L. :Computer Organization and
+Hennessy Design: The
+Hardware/Software
+Interface, Third edition. i
+3. William Stallings :Computer Organization and
+Architecture: Designing for |
+Performance, Prentice Hall
+i 1
+
+
+CSE 3107: Communication Engineering
+Credit: 3.0
+Pre-requisite: CSE 2207 (Computer Networks)
+Course Content:
+Communication Engineering Fundamentals: Waveforms Spectra,
+Elements of basic communication systems, Periodic and nonperiodic
+waveforms and their properties, Fourier series, Noise and its different types.
+Analogue Communication: Amplitude modulation, Amplitude modulation
+index, Frequency spectrum for sinusoidal AM, Frequency Modulation:
+Frequency Modulation, Sinusoidal FM, Frequency spectrum for Sinusoidal
+FM, Phase Modulation. Pulse Modulation, Pulse Codes Modulation (PCM),
+Quantization, Compression, PCM Receiver, Differential PCM, Delta
+Modulation, Sigma-Delta A/D conversion, Pulse Modulation. Analog
+Multiplexing
+Digital Communication: Basic Digital Communication System,
+Synchronization, Asynchronous Transmission, Probability of Bit Error in
+Base band Transmission, Matched Filter, Eye Diagrams, Digital Carrier
+Systems, Amplitude Shift keying, Frequency Shift Keying, Phase Shift
+Keying, Carrier Recovery Circuits, Quadrature Phase Shift Keying, Error
+Control Coding, Block Control, Repetition Encoding, Parity Encoding,
+Convolution Encoding. Digital Multiplexing.
+Satellite Communication: Satellite Communication, Kepler’s First and *
+Second Law, Orbits, Geostationary Orbits, Power System. 5G technologies.
+Fiber Optic Communication: Fiber Optic Communication, Propagation
+within a Fiber, Modes of Propagation, Losses in Fibers, Light sources for
+Fiber optics, Photo detectors.
+Books Recommended:
+1. Behrouz A. : Data Communication and Networking,Tata
+Forouzan McGraw-Hill Edition [Text Book]
+2. George Kennedy, : Electronic communication System, Tata
+Bernard Davis McGraw-Hill Edition [Text Book] a
+3. John M. Senior =: Optical Fiber Communication, Prentice-Hall of
+India Pvt Ltd
+4. William Stallings : Data and computer Communication, Addison
+Wesly
+5. Theodore S. : Wireless Communication, Prentice-Hall of India
+Rappaport Pvt Ltd\n\nMAT 3141: Statistics and Probability
+
+MAT 3141: Statistics and Probability
+Credit: 3.0
+Pre-requisite; MAT 1141 (Differential and Integral Calculus), MAT 2241
+(Linear Algebra and Complex Variablew)
+Course Content:
+An Introduction: Definition of Statistics, Uses and importance, Variables,
+Measurement level of variables, Sample and Population,
+Measures of central tendency: Introduction, the arithmetic mean,
+
+’ Geometric mean, Harmonic mean, Median, mode, computing of means for
+grouped data and ungrouped data, Advantages, and disadvantages, and Uses
+of all measures.
+Measures of dispersion: Introduction of dispersion, Absolute and Relative
+measures, Range, mean deviation, Standard deviation, Variance, Quartile
+deviation, Coefficient of Variation, Advantages, disadvantages and uses of
+all measures,
+Data representation: Classification, Types of classification, Tabular
+representation, Graphical representation, Pie chart, Histogram, Bar chart,
+Frequency curve, Frequency Polygon and Ogive curve,
+Correlation and Regression: Correlation, Types of correlation, Importance
+and uses of correlation, Properties of correlation, Rank correlation,
+Regression, Differences between regression line and regression model,
+Simple linear Regression, Importance of regression analysis, Comparison of
+regression and correlation.
+Probability: Concept of probability, Sample Space, Events, Union and
+Intersection of Events, Probability of events, Laws of probability,
+Conditional probabilitics, Bayes’ theorem, Chebyshev's Inequality and
+Practical examples.
+Random variables and probability Distribution: Basic concepts, Discrete
+and continuous random variables, Probability Mass Function (PMF),
+Probability Density Function (PDF), Cumulative Distribution Function
+(CDF), Mathematical expectation and variance, Joint, marginal and
+conditional density functions, Conditional Expectation and conditional
+variance, Probability generating function, Characteristic function, Binomial
+distribution, Poisson distribution, and Normal distribution with Practical
+examples,
+Sampling design and Statistical test: Sampling Design, Simple random
+sampling, Systematic sampling, Stratified sampling; Cluster sampling,
+Judgment sampling, Chi-squared test, Z test, t-test and F-test.
+
+\ a0 a
+
+
+Books Recommended:
+1. Murray R. Spiegel and Larry :Schaum’s Outlines of Statistics,
+J. Stephens Companies, USA, Fourth Editions.
+[Text Book]
+2. Mr. Nurul Islam :Statistics & Probability
+3. 1. B. Anderson :Interpreting Data, Chapman and
+Hall, London
+4. H. Cramer :The Elements of Probability
+Theory, Wiley, N. Y
+5. P. Hoel Introductory Statistics, Wiley and
+Sons, N.Y
+6. Lind, Marchal, Mason :Statistical Techniques in Business &
+Economics,
+| Irwin/McGraw-Hill, USA, Fourteen
+Editions.
+
+
