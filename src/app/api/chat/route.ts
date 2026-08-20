@@ -5,6 +5,7 @@ import { createAdminClient } from '@/utils/supabase/admin'
 import { NextResponse } from 'next/server'
 import { logServerEvent, generateRequestId, PerformanceMetrics } from '@/lib/server-logger'
 import { recordTelemetryEvent } from '@/lib/telemetry'
+import { CHAT_MODEL_ID } from '@/lib/ai-config'
 
 const RATE_LIMIT_WINDOW_MS = 60 * 1000 // 1 minute
 const MAX_REQUESTS_PER_WINDOW = 10
@@ -864,7 +865,7 @@ Do not invent university data.
     let streamCompletedCleanly = false
 
     const result = streamText({
-      model: openai('gpt-4o-mini'),
+      model: openai(CHAT_MODEL_ID),
       messages,
       system: systemPrompt,
       async onFinish({ text }) {

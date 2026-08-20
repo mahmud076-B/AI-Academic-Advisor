@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Send, Sparkles, User, ChevronDown, ChevronUp, BrainCircuit, FileText, Clock, RotateCcw, AlertCircle } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import MarkdownRenderer from '@/components/MarkdownRenderer'
+import { CHAT_MODEL_DISPLAY_NAME } from '@/lib/ai-config'
 
 const EVIDENCE_STREAM_MARKER = '__AI_CAMPUS_BRAIN_EVIDENCE__'
 const CLIENT_TIMEOUT_MS = 50000 // 50s safe threshold to prevent indefinite hang
@@ -551,9 +552,15 @@ export default function ChatUI({
             <Send className="w-4 h-4" />
           </button>
         </form>
-        <p className="chat-disclaimer text-center">
-          AI Advisor uses shared Campus Memory. It can make mistakes. Verify important information.
-        </p>
+        <div className="max-w-[760px] mx-auto mt-2 flex flex-col sm:flex-row items-center justify-between gap-2 px-1">
+          <p className="chat-disclaimer text-center sm:text-left !mt-0 !max-w-none">
+            AI Advisor uses shared Campus Memory. It can make mistakes. Verify important information.
+          </p>
+          <div className="inline-flex items-center gap-1 text-[11px] font-medium text-[var(--color-text-muted)] bg-[var(--color-surface-1)] border border-[var(--color-border-subtle)] px-2 py-0.5 rounded-full flex-shrink-0 select-none">
+            <span className="text-[var(--color-brand-600)] text-[10px]">✦</span>
+            <span>{CHAT_MODEL_DISPLAY_NAME}</span>
+          </div>
+        </div>
       </div>
     </div>
   )
