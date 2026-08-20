@@ -877,7 +877,8 @@ Do not invent university data.
           const { error: assistantMsgError } = await adminSupabase.from('messages').insert({
             conversation_id: conversationId,
             role: 'assistant',
-            content: text
+            content: text,
+            metadata: evidencePayload.length > 0 ? { evidence: evidencePayload } : null
           })
           if (assistantMsgError) {
             console.error('Failed to save assistant message:', assistantMsgError)

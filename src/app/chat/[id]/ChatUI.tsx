@@ -8,7 +8,7 @@ import MarkdownRenderer from '@/components/MarkdownRenderer'
 const EVIDENCE_STREAM_MARKER = '__AI_CAMPUS_BRAIN_EVIDENCE__'
 const CLIENT_TIMEOUT_MS = 50000 // 50s safe threshold to prevent indefinite hang
 
-type EvidenceItem = {
+export type EvidenceItem = {
   title: string
   content: string
   created_at?: string | null
@@ -21,7 +21,7 @@ type EvidenceItem = {
   conflictSummary?: string
 }
 
-type ChatMessage = {
+export type ChatMessage = {
   id: string
   role: 'user' | 'assistant'
   content: string
@@ -332,70 +332,142 @@ export default function ChatUI({
                 </div>
 
                 {/* Evidence Section */}
-                {m.role === 'assistant' && evidence.length > 0 && (
-                  <div className="mt-6 space-y-3">
-                    {evidence.map((item: EvidenceItem, index: number) => {
-                      const isSyllabus = item.relevance === 'Official Course Material'
-                      const isConflicting = item.conflictStatus === 'conflicting'
-                      
-                      const themeColor = isSyllabus ? 'var(--color-syllabus-500)' : 'var(--color-brain-500)'
-                      const bgColor = isSyllabus ? 'var(--color-syllabus-50)' : 'var(--color-brain-50)'
-                      const borderColor = isSyllabus ? 'var(--color-syllabus-200)' : 'var(--color-brain-200)'
-                      const textColor = isSyllabus ? 'var(--color-syllabus-800)' : 'var(--color-brain-800)'
-                      const Icon = isSyllabus ? FileText : BrainCircuit
-                      const label = isSyllabus ? 'Official Course Syllabus' : 'Campus Brain'
-                      
-                      // Only show top item unless expanded
-                      if (!isEvidenceExpanded && index > 0) return null
+                {m.role === 'assistant' && evidence.length > 0 && (() => {
+                  const campusMemories = evidence.filter(item => item.relevance !== 'Official Course Material')
+                  const syllabusMemories = evidence.filter(item => item.relevance === 'Official Course Material')
+                  const isCampusExpanded = !!expandedEvidence[`${m.id}-campus`]
+                  const isSyllabusExpanded = !!expandedEvidence[`${m.id}-syllabus`]
 
-                      return (
-                        <div key={`${m.id}-${index}`} className="rounded-[var(--radius-lg)] border bg-[var(--color-surface-0)] overflow-hidden transition-all duration-[var(--transition-duration-standard)]" style={{ borderColor: isConflicting ? 'var(--color-amber-200)' : borderColor }}>
-                          {/* Evidence Header */}
-                          <div className="px-4 py-2.5 flex items-center justify-between gap-3 border-b transition-colors" style={{ backgroundColor: isConflicting ? 'var(--color-amber-50)' : bgColor, borderColor: isConflicting ? 'var(--color-amber-200)' : borderColor }}>
-                            <div className="flex items-center gap-2 text-[var(--text-small)] font-medium" style={{ color: isConflicting ? 'var(--color-amber-800)' : textColor }}>
-                              <Icon className="w-3.5 h-3.5" />
-                              {label}
-                            </div>
-                            <div className="flex items-center gap-3">
-                              {item.freshnessLabel && (
-                                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${item.caution ? 'bg-amber-100 text-amber-800' : 'bg-white/60 text-slate-600'}`}>
-                                  {item.freshnessLabel}
-                                </span>
-                              )}
-                              {index === 0 && showEvidenceToggle && (
-                                <button
-                                  type="button"
-                                  onClick={() => setExpandedEvidence(prev => ({ ...prev, [m.id]: !prev[m.id] }))}
-                                  aria-expanded={isEvidenceExpanded}
-                                  aria-controls={`evidence-content-${m.id}`}
-                                  className="flex items-center gap-1 text-[10px] font-medium hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 rounded-sm" style={{ color: isConflicting ? 'var(--color-amber-800)' : textColor, '--tw-ring-color': themeColor } as React.CSSProperties}
-                                >
-                                  {isEvidenceExpanded ? 'Hide Sources' : `+${evidence.length - 1} More`}
-                                  {isEvidenceExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                                </button>
-                              )}
-                            </div>
-                          </div>
-                          
-                          {/* Evidence Body */}
-                          <div id={`evidence-content-${m.id}`} className="px-4 py-3 bg-[var(--color-surface-0)]">
-                            <div className="text-[var(--text-small)] font-medium text-[var(--color-text-primary)] mb-1 break-words">
-                              {item.title}
-                            </div>
-                            {isConflicting && index === 0 && item.conflictSummary && (
-                              <div className="mb-2 text-[11px] text-amber-700 font-medium">
-                                ⚠ {item.conflictSummary}
-                              </div>
+                  return (
+                    <div className="mt-4 space-y-3">
+                      {/* Collapsed Trigger Pills Area */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {campusMemories.length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => setExpandedEvidence(prev => ({ ...prev, [`${m.id}-campus`]: !prev[`${m.id}-campus`] }))}
+                            aria-expanded={isCampusExpanded}
+                            aria-controls={`evidence-drawer-${m.id}-campus`}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all duration-[var(--transition-duration-micro)] border bg-[var(--color-brain-50)]/70 text-[var(--color-brain-800)] border-[var(--color-brain-200)] hover:bg-[var(--color-brain-100)] shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brain-500)] cursor-pointer"
+                          >
+                            <BrainCircuit className="w-3.5 h-3.5 text-[var(--color-brain-600)] flex-shrink-0" />
+                            <span>Campus Brain</span>
+                            <span className="text-[var(--color-brain-400)]">·</span>
+                            <span className="underline decoration-[var(--color-brain-300)] underline-offset-2 hover:decoration-[var(--color-brain-600)]">
+                              {isCampusExpanded ? 'Hide details' : 'See more'}
+                            </span>
+                            {isCampusExpanded ? (
+                              <ChevronUp className="w-3 h-3 text-[var(--color-brain-600)] flex-shrink-0" />
+                            ) : (
+                              <ChevronDown className="w-3 h-3 text-[var(--color-brain-600)] flex-shrink-0" />
                             )}
-                            <div className="text-[12px] leading-relaxed text-[var(--color-text-secondary)] break-words whitespace-pre-wrap">
-                              {item.content}
-                            </div>
-                          </div>
+                          </button>
+                        )}
+
+                        {syllabusMemories.length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => setExpandedEvidence(prev => ({ ...prev, [`${m.id}-syllabus`]: !prev[`${m.id}-syllabus`] }))}
+                            aria-expanded={isSyllabusExpanded}
+                            aria-controls={`evidence-drawer-${m.id}-syllabus`}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all duration-[var(--transition-duration-micro)] border bg-[var(--color-syllabus-50)]/70 text-[var(--color-syllabus-800)] border-[var(--color-syllabus-200)] hover:bg-[var(--color-syllabus-100)] shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-syllabus-500)] cursor-pointer"
+                          >
+                            <FileText className="w-3.5 h-3.5 text-[var(--color-syllabus-600)] flex-shrink-0" />
+                            <span>Official Course Syllabus</span>
+                            <span className="text-[var(--color-syllabus-400)]">·</span>
+                            <span className="underline decoration-[var(--color-syllabus-300)] underline-offset-2 hover:decoration-[var(--color-syllabus-600)]">
+                              {isSyllabusExpanded ? 'Hide details' : 'See more'}
+                            </span>
+                            {isSyllabusExpanded ? (
+                              <ChevronUp className="w-3 h-3 text-[var(--color-syllabus-600)] flex-shrink-0" />
+                            ) : (
+                              <ChevronDown className="w-3 h-3 text-[var(--color-syllabus-600)] flex-shrink-0" />
+                            )}
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Campus Brain Expanded Drawer */}
+                      {campusMemories.length > 0 && isCampusExpanded && (
+                        <div id={`evidence-drawer-${m.id}-campus`} className="space-y-2.5 animate-in fade-in slide-in-from-top-1 duration-200">
+                          {campusMemories.map((item, cIdx) => {
+                            const isConflicting = item.conflictStatus === 'conflicting'
+                            return (
+                              <div
+                                key={`${m.id}-camp-${cIdx}`}
+                                className="rounded-[var(--radius-lg)] border bg-[var(--color-surface-0)] overflow-hidden transition-all duration-[var(--transition-duration-standard)]"
+                                style={{ borderColor: isConflicting ? 'var(--color-amber-200)' : 'var(--color-brain-200)' }}
+                              >
+                                <div
+                                  className="px-3.5 py-2 flex items-center justify-between gap-2 border-b"
+                                  style={{
+                                    backgroundColor: isConflicting ? 'var(--color-amber-50)' : 'var(--color-brain-50)',
+                                    borderColor: isConflicting ? 'var(--color-amber-200)' : 'var(--color-brain-200)',
+                                  }}
+                                >
+                                  <div className="flex items-center gap-1.5 text-[11px] font-semibold" style={{ color: isConflicting ? 'var(--color-amber-800)' : 'var(--color-brain-800)' }}>
+                                    <BrainCircuit className="w-3.5 h-3.5" />
+                                    <span>Campus Brain Reference</span>
+                                  </div>
+                                  {item.freshnessLabel && (
+                                    <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${item.caution ? 'bg-amber-100 text-amber-800' : 'bg-white/80 text-slate-600'}`}>
+                                      {item.freshnessLabel}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="px-3.5 py-2.5 bg-[var(--color-surface-0)] space-y-1">
+                                  <div className="text-[12px] font-semibold text-[var(--color-text-primary)] break-words">
+                                    {item.title}
+                                  </div>
+                                  {isConflicting && cIdx === 0 && item.conflictSummary && (
+                                    <div className="text-[11px] text-amber-700 font-medium">
+                                      ⚠ {item.conflictSummary}
+                                    </div>
+                                  )}
+                                  <div className="text-[11px] leading-relaxed text-[var(--color-text-secondary)] break-words whitespace-pre-wrap">
+                                    {item.content}
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })}
                         </div>
-                      )
-                    })}
-                  </div>
-                )}
+                      )}
+
+                      {/* Official Syllabus Expanded Drawer */}
+                      {syllabusMemories.length > 0 && isSyllabusExpanded && (
+                        <div id={`evidence-drawer-${m.id}-syllabus`} className="space-y-2.5 animate-in fade-in slide-in-from-top-1 duration-200">
+                          {syllabusMemories.map((item, sIdx) => (
+                            <div
+                              key={`${m.id}-syl-${sIdx}`}
+                              className="rounded-[var(--radius-lg)] border bg-[var(--color-surface-0)] overflow-hidden transition-all duration-[var(--transition-duration-standard)] border-[var(--color-syllabus-200)]"
+                            >
+                              <div className="px-3.5 py-2 flex items-center justify-between gap-2 border-b bg-[var(--color-syllabus-50)] border-[var(--color-syllabus-200)]">
+                                <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[var(--color-syllabus-800)]">
+                                  <FileText className="w-3.5 h-3.5" />
+                                  <span>Official Course Syllabus</span>
+                                </div>
+                                {item.freshnessLabel && (
+                                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/80 text-slate-600">
+                                    {item.freshnessLabel}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="px-3.5 py-2.5 bg-[var(--color-surface-0)] space-y-1">
+                                <div className="text-[12px] font-semibold text-[var(--color-text-primary)] break-words">
+                                  {item.title}
+                                </div>
+                                <div className="text-[11px] leading-relaxed text-[var(--color-text-secondary)] break-words whitespace-pre-wrap">
+                                  {item.content}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })()}
               </div>
             </div>
           )

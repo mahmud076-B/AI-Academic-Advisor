@@ -1,7 +1,7 @@
 import { getConversations, getMessages, createConversation } from '../actions'
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
-import ChatUI from './ChatUI'
+import ChatUI, { ChatMessage, EvidenceItem } from './ChatUI'
 
 export default async function ChatPage(props: { 
   params: Promise<{ id: string }>,
@@ -34,11 +34,14 @@ export default async function ChatPage(props: {
 
   const dbMessages = await getMessages(conversationId)
 
-  // Map DB messages to the format expected by useChat
-  const initialMessages = dbMessages.map(msg => ({
+  // Map DB messages to the format expected by ChatUI, preserving persisted evidence
+  const initialMessages: ChatMessage[] = dbMessages.map(msg => ({
     id: msg.id,
     role: msg.role as 'user' | 'assistant',
     content: msg.content,
+    evidence: msg.role === 'assistant'
+      ? ((msg.metadata as { evidence?: EvidenceItem[] } | null)?.evidence ?? [])
+      : [],
   }))
 
   return (
